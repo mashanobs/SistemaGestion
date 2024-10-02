@@ -1,0 +1,26 @@
+﻿@page "/venta/{id:int}/editar"
+@inject VentaBusiness Service
+
+<h3>EditVenta</h3>
+
+@if (Venta == null)
+{
+    <p>No existe la venta</p>
+}
+else
+{
+    <VentaForm Venta="Venta" />
+}
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private Venta? Venta;
+
+    protected override void OnInitialized()
+    {
+        Venta = Service.GetOneVenta(Id);
+    }
+}

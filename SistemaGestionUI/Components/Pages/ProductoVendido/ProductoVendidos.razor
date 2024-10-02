@@ -1,0 +1,94 @@
+﻿
+@page "/producto-vendido"
+@inject ProductoVendidoBusiness Service
+
+
+<h3>Productos Vendidos</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class=col-6>
+                    <a href="/producto-vendido/new">
+                        <button class="btn btn-success">
+                            Nuevo Producto Vendido
+                        </button>
+                    </a>
+                </div>
+                <div class=col-6>
+                  @*   <button class="btn btn-primary" @onclick="ActualizarTotal">
+                        Actualizar Total
+                    </button> *@
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Filtrar por..." @bind="filtro" />
+             @*    <button type="button" class="btn btn-outline-secondary" @onclick="Buscar">Buscar</button> *@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>IdProducto</th>
+                    <th>Stock</th>
+                    <th>IdVenta</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ProductoVendido productoVendido in productosVendidos)
+                {
+                    <tr>
+                        <td>@productoVendido.Id</td>
+                        <td>@productoVendido.IdProducto</td>
+                        <td>@productoVendido.Stock</td>
+                        <td>@productoVendido.IdVenta</td>
+                        <td>
+                            <a href="/producto-vendido/@productoVendido.Id/Editar">Editar</a>
+                        </td>
+                        <td>
+                            <button @onclick="@(() => EliminarProductoVendido(productoVendido.Id))" class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@code {
+    private List<ProductoVendido> productosVendidos = new List<ProductoVendido>();
+
+    private string filtro = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        productosVendidos = Service.GetProductoVendidos();
+    }
+
+    public void EliminarProductoVendido(int id)
+    {
+        Service.DeleteProductoVendido(id);
+        productosVendidos = Service.GetProductoVendidos();
+    }
+
+    // public void Buscar()
+    // {
+    //     productosVendidos = Service.GetProductoVendidosBy(filtro);
+    // }
+
+    // private void ActualizarTotal(MouseEventArgs e)
+    // {
+    //     Service.UpdateTotalProductoVendidos();
+    //     productosVendidos = Service.GetProductoVendidos();
+    // }
+}

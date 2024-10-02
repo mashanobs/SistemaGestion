@@ -1,0 +1,26 @@
+﻿@page "/producto-vendido/{id:int}/editar"
+@inject ProductoVendidoBusiness Service
+
+<h3>EditProductoVendido</h3>
+
+@if (ProductoVendido == null)
+{
+    <p>No existe el producto vendido</p>
+}
+else
+{
+    <ProductoVendidoForm ProductoVendido="ProductoVendido" />
+}
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private ProductoVendido? ProductoVendido;
+
+    protected override void OnInitialized()
+    {
+        ProductoVendido = Service.GetOneProductoVendido(Id);
+    }
+}

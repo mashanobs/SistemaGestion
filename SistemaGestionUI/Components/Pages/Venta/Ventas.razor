@@ -1,0 +1,91 @@
+﻿
+@page "/venta"
+@inject VentaBusiness Service
+
+<h3>Ventas</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class=col-6>
+                    <a href="/venta/new">
+                        <button class="btn btn-success">
+                            Nueva Venta
+                        </button>
+                    </a>
+                </div>
+                <div class=col-6>
+                    @* <button class="btn btn-primary" @onclick="ActualizarTotal">
+                        Actualizar Total
+                    </button> *@
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Filtrar por..." @bind="filtro" />
+               @*  <button type="button" class="btn btn-outline-secondary" @onclick="Buscar">Buscar</button> *@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Comentarios</th>
+                    <th>IdUsuario</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Venta venta in ventas)
+                {
+                    <tr>
+                        <td>@venta.Id</td>
+                        <td>@venta.Comentarios</td>
+                        <td>@venta.IdUsuario</td>
+                        <td>
+                            <a href="/venta/@venta.Id/Editar">Editar</a>
+                        </td>
+                        <td>
+                            <button @onclick="@(() => EliminarVenta(venta.Id))" class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@code {
+    private List<Venta> ventas = new List<Venta>();
+
+    private string filtro = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        ventas = Service.GetVentas();
+    }
+
+    public void EliminarVenta(int id)
+    {
+        Service.DeleteVenta(id);
+        ventas = Service.GetVentas();
+    }
+
+    // public void Buscar()
+    // {
+    //     ventas = Service.GetVentasBy(filtro);
+    // }
+
+    // private void ActualizarTotal(MouseEventArgs e)
+    // {
+    //     Service.UpdateTotalVentas();
+    //     ventas = Service.GetVentas();
+    // }
+}

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Components\Layout\MainLayout.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\Layout\MainLayout.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SistemaGestionBusiness\SistemaGestionBusiness.csproj" />
+    <ProjectReference Include="..\SistemaGestionEntities\SistemaGestionEntities.csproj" />
+  </ItemGroup>
+
+</Project>

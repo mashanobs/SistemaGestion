@@ -1,0 +1,30 @@
+﻿@page "/usuarios/{id:int}/editar"
+@using SistemaGestionBusiness
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@inject UsuarioBusiness UsuariosService
+<h3>Editar Usuario</h3>
+
+@if (usuario == null)
+{
+  <p>Usuario no encontrado</p>
+}
+else
+{
+  <UsuarioForm Usuario="usuario" />
+}
+
+@code
+{
+  private Usuario? usuario;
+
+  [Parameter]
+  public int Id { get; set; }
+
+  protected override void OnInitialized()
+  {
+    usuario = UsuariosService.GetOneUsuario(Id);
+  }
+
+
+}
