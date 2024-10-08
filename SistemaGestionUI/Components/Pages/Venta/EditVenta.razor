@@ -19,8 +19,8 @@ else
 
     private Venta? Venta;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Venta = Service.GetOneVenta(Id);
+        Venta = await Service.GetOneVenta(Id);
     }
 }

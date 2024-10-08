@@ -1,5 +1,4 @@
 ﻿@page "/usuarios/{id:int}/editar"
-@using SistemaGestionBusiness
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
 @inject UsuarioBusiness UsuariosService
@@ -21,10 +20,15 @@ else
   [Parameter]
   public int Id { get; set; }
 
-  protected override void OnInitialized()
-  {
-    usuario = UsuariosService.GetOneUsuario(Id);
-  }
+
+
+    protected override async Task OnInitializedAsync()
+
+    {
+
+        usuario = await UsuariosService.GetOneUsuario(Id);
+
+    }
 
 
 }

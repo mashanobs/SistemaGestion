@@ -1,5 +1,5 @@
-﻿@inject NavigationManager NavigationManager
-@using SistemaGestionBusiness
+﻿
+@inject NavigationManager NavigationManager
 @inject UsuarioBusiness UsuariosService
 <EditForm Model="Usuario" OnValidSubmit="SubmitUsuario" FormName="usuario-form">
 
@@ -40,13 +40,19 @@
   {
   }
 
-  private void SubmitUsuario()
-  {
-    if (Usuario.Id == 0)
-      UsuariosService.InsertUsuario(Usuario);
-    else
-      UsuariosService.UpdateUsuario(Usuario.Id, Usuario);
 
-    NavigationManager.NavigateTo("/usuarios");
-  }
+
+    private async Task SubmitUsuario()
+    {
+        if (Usuario.Id == 0)
+
+            await UsuariosService.InsertUsuario(Usuario);
+
+        else
+
+            await UsuariosService.UpdateUsuario(Usuario.Id, Usuario);
+
+        NavigationManager.NavigateTo("/usuarios");
+
+    }
 }

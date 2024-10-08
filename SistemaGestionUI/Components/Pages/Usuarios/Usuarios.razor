@@ -1,5 +1,4 @@
 ﻿@page "/usuarios"
-@using SistemaGestionBusiness
 @rendermode InteractiveServer
 @inject UsuarioBusiness UsuariosService
 <h3>Usuarios</h3>
@@ -62,19 +61,21 @@
 
   private string buscar = string.Empty;
 
-  protected override void OnInitialized()
-  {
-    usuarios = UsuariosService.GetUsuarios();
-  }
+    protected override async Task OnInitializedAsync()
+    {
+        usuarios = await UsuariosService.GetUsuarios();
+    }
 
-  private void EliminarUsuario(int id)
-  {
-    UsuariosService.DeleteUsuario(id);
-    usuarios = UsuariosService.GetUsuarios();
-  }
+    private async Task EliminarUsuario(int id)
 
-  private void BuscarUsuario()
-  {
-    usuarios = UsuariosService.GetUsuariosBy(buscar);
-  }
+    {
+        await UsuariosService.DeleteUsuario(id);
+        usuarios = await UsuariosService.GetUsuarios();
+    }
+
+    private async Task BuscarUsuario()
+
+    {
+        usuarios = await UsuariosService.GetUsuariosBy(buscar);
+    }
 }

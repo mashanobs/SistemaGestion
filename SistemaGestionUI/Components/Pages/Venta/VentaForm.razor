@@ -26,15 +26,15 @@
     {
     }
 
-    public void CrearOActualizarVenta()
+    public async Task CrearOActualizarVenta()
     {
         if (Venta.Id > 0)
         {
-            Service.UpdateVenta(Venta.Id, Venta);
+            await Service.UpdateVenta(Venta.Id, Venta);
         }
         else
         {
-            Service.InsertVenta(Venta);
+            await Service.InsertVenta(Venta);
         }
 
         NavigationManager.NavigateTo("/venta");

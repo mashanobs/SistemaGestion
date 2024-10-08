@@ -31,15 +31,15 @@
     {
     }
 
-    public void CrearOActualizarProductoVendido()
+    public async Task CrearOActualizarProductoVendido()
     {
         if (ProductoVendido.Id > 0)
         {
-            Service.UpdateProductoVendido(ProductoVendido.Id, ProductoVendido);
+            await Service.UpdateProductoVendido(ProductoVendido.Id, ProductoVendido);
         }
         else
         {
-            Service.InsertProductoVendido(ProductoVendido);
+            await Service.InsertProductoVendido(ProductoVendido);
         }
 
         NavigationManager.NavigateTo("/producto-vendido");

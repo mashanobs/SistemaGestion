@@ -77,25 +77,25 @@
 
     private string filtro = string.Empty;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
 
-        productos = Service.GetProductos();
+        productos = await Service.GetProductos();
     }
 
-    public void EliminarProducto(int id)
+    public async Task EliminarProducto(int id)
     {
-        Service.DeleteProducto(id);
-        productos = Service.GetProductos();
+        await Service.DeleteProducto(id);
+        productos = await Service.GetProductos();
     }
 
-    public void Buscar()
+    public async Task Buscar()
     {
-        productos = Service.GetProductosBy(filtro);
+        productos = await Service.GetProductosBy(filtro);
     }
-    private void ActualizarTotal(MouseEventArgs e)
+    private async Task ActualizarTotal(MouseEventArgs e)
     {
-        Service.UpdateTotalProductos();
-        productos = Service.GetProductos();
+        await Service.UpdateTotalProductos();
+        productos = await Service.GetProductos();
     }
 }

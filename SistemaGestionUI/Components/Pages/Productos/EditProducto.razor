@@ -3,7 +3,7 @@
 
 <h3>EditProducto</h3>
 
-@if(Producto.Id == null)
+@if(Producto == null)
 {
     <p>No existe el producto</p>
 }
@@ -19,9 +19,9 @@ else
 
     private Producto? Producto;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
 
-        Producto = Service.GetOneProducto(Id);
+        Producto = await Service.GetOneProducto(Id);
     }
 }

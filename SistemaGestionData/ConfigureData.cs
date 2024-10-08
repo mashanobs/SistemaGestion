@@ -18,7 +18,7 @@ namespace SistemaGestionData
             services.AddScoped<UsuariosDataAccess>(); // Agregado
             services.AddScoped<ProductoVendidoDataAccess>(); // Agregado
             services.AddScoped<VentaDataAccess>(); // Agregado
-            services.AddScoped<MyDbContext>();
+            //services.AddScoped<MyDbContext>();
             return services;
         }
     }

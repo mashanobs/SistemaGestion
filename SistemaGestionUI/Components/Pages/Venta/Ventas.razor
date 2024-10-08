@@ -67,15 +67,15 @@
 
     private string filtro = string.Empty;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        ventas = Service.GetVentas();
+        ventas = await Service.GetVentas();
     }
 
-    public void EliminarVenta(int id)
+    public async Task EliminarVenta(int id)
     {
-        Service.DeleteVenta(id);
-        ventas = Service.GetVentas();
+        await Service.DeleteVenta(id);
+        ventas = await Service.GetVentas();
     }
 
     // public void Buscar()

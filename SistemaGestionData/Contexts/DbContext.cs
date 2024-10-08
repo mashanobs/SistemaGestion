@@ -10,7 +10,6 @@ public class MyDbContext : DbContext
     public DbSet<ProductoVendido> ProductoVendido { get; set; }
     public DbSet<Venta> Venta { get; set; }
 
-
     public MyDbContext()
         : base() { }
 

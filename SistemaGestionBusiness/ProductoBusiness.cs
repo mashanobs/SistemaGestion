@@ -34,9 +34,10 @@ namespace SistemaGestionBusiness
             return _productosDataAccess.GetOneProducto(id);
         }
 
-        public void InsertProducto(Producto producto)
+        public Producto InsertProducto(Producto producto)
         {
             _productosDataAccess.InsertProducto(producto);
+            return producto;
         }
 
         public void UpdateProducto(int id, Producto producto)

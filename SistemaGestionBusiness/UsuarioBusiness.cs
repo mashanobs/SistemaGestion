@@ -27,9 +27,9 @@ public class UsuarioBusiness
         return _usuariosDataAccess.GetOneUsuario(id);
     }
 
-    public void InsertUsuario(Usuario usuario)
+    public Usuario InsertUsuario(Usuario usuario)
     {
-        _usuariosDataAccess.InsertUsuario(usuario);
+       return _usuariosDataAccess.InsertUsuario(usuario);
     }
 
     public void UpdateUsuario(int id, Usuario usuario)

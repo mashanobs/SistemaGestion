@@ -46,15 +46,15 @@
     {
 
     }
-    public void CrearOActualizarProducto()
+    public async Task CrearOActualizarProducto()
     {
-        if(Producto.Id > 0)
+        if (Producto.Id > 0)
         {
-            Service.UpdateProducto(Producto.Id, Producto);
-        } 
+            await Service.UpdateProducto(Producto.Id, Producto);
+        }
         else
         {
-            Service.InsertProducto(Producto);
+            await Service.InsertProducto(Producto);
         }
 
         NavigationManager.NavigateTo("/productos");

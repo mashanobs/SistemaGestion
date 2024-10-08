@@ -33,10 +33,11 @@ public class UsuariosDataAccess
         return _context.Usuarios.FirstOrDefault(u => u.Id == id);
     }
 
-    public void InsertUsuario(Usuario usuario)
+    public Usuario InsertUsuario(Usuario usuario)
     {
         _context.Usuarios.Add(usuario);
         _context.SaveChanges();
+        return usuario;
     }
 
     public void UpdateUsuario(int id, Usuario usuario)

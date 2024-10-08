@@ -1,5 +1,6 @@
+using SistemaGestionUI.ClientServices;
 using SistemaGestionUI.Components;
-using SistemaGestionBusiness;
+//using SistemaGestionBusiness;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.ConfigureBusinessLayer(); // Llama al configureService de Business 
+builder.Services.AddTransient<ProductoBusiness>();
+builder.Services.AddTransient<UsuarioBusiness>();
+builder.Services.AddTransient<ProductoVendidoBusiness>();
+builder.Services.AddTransient<VentaBusiness>();
+
+builder.Services.AddHttpClient<ProductoBusiness>(
+    client => client.BaseAddress = new Uri($"{builder.Configuration["ApiUrl"]}/api/Productos/")
+    );
+
+builder.Services.AddHttpClient<UsuarioBusiness>(
+    client => client.BaseAddress = new Uri($"{builder.Configuration["ApiUrl"]}/api/Usuarios/")
+    );
+
+builder.Services.AddHttpClient<ProductoVendidoBusiness>(
+    client => client.BaseAddress = new Uri($"{builder.Configuration["ApiUrl"]}/api/ProductoVendido/")
+    );
+
+builder.Services.AddHttpClient<VentaBusiness>(
+    client => client.BaseAddress = new Uri($"{builder.Configuration["ApiUrl"]}/api/Venta/")
+    );
+
+//builder.Services.ConfigureBusinessLayer(); // Llama al configureService de Business 
 
 var app = builder.Build();
 
