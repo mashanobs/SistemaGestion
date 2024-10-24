@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaGestionEntities;
 using SistemaGestionBusiness;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace WebApi.Controllers
 {
@@ -60,5 +61,31 @@ namespace WebApi.Controllers
             _usuariosBusiness.DeleteUsuario(id);
             return NoContent();
         }
+
+
+        // Endpoint para iniciar sesión
+        [HttpPost("login")]
+        public ActionResult<Usuario?> IniciarSesion([FromBody] Usuario credenciales)
+        {
+            var usuario = _usuariosBusiness.IniciarSesion(credenciales.Email, credenciales.Contraseña);
+            if (usuario == null)
+            {
+                return Unauthorized();
+            }
+            return usuario;
+        }
+
+        // Endpoint para obtener el nombre de un usuario por su ID
+        [HttpGet("{id}/nombre")]
+        public ActionResult<string> GetNombreUsuario([FromRoute(Name = "id")] int id)
+        {
+            var nombre = _usuariosBusiness.GetNombreUsuario(id);
+            if (nombre == null)
+            {
+                return NotFound(); // Si no se encuentra el usuario, retornamos un error 404
+            }
+            return Ok(nombre);
+        }
     }
 }
+

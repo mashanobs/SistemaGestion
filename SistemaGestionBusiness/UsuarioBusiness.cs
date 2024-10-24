@@ -46,4 +46,16 @@ public class UsuarioBusiness
     {
         return _usuariosDataAccess.GetUsuariosBy(filtro);
     }
+
+    // Método para iniciar sesión
+    public Usuario? IniciarSesion(string email, string password)
+    {
+        return _usuariosDataAccess.IniciarSesion(email, password);
+    }
+
+    // Método para obtener el nombre de un usuario por su ID
+    public string? GetNombreUsuario(int id)
+    {
+        return _usuariosDataAccess.GetNombreUsuario(id);
+    }
 }

@@ -42,5 +42,22 @@ namespace SistemaGestionUI.ClientServices
             return await _httpClient.GetFromJsonAsync<List<Usuario>>(
                 QueryHelpers.AddQueryString("", new Dictionary<string, string>() { { "filtro", filtro } }));
         }
+
+        public async Task<Usuario?> IniciarSesion(string email, string password)
+        {
+            var loginRequest = new { Email = email, Password = password };
+            var response = await _httpClient.PostAsJsonAsync("login", loginRequest);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Usuario>();
+            }
+            return null;
+        }
+
+        // Método para obtener el nombre de un usuario por su ID
+        public async Task<string?> GetNombreUsuario(int id)
+        {
+            return await _httpClient.GetStringAsync($"{id}/nombre");
+        }
     }
 }

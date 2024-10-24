@@ -64,4 +64,18 @@ public class UsuariosDataAccess
             _context.SaveChanges();
         }
     }
+
+    // Método para iniciar sesión
+    public Usuario? IniciarSesion(string email, string password)
+    {
+        return _context.Usuarios
+            .FirstOrDefault(u => u.Email == email && u.Contraseña == password);
+    }
+
+    // Método para obtener el nombre de un usuario por su ID
+    public string? GetNombreUsuario(int id)
+    {
+        var usuario = _context.Usuarios.FirstOrDefault(u => u.Id == id);
+        return usuario?.Nombre;
+    }
 }
